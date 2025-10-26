@@ -15,6 +15,8 @@ struct Stack {
   Stack() = default; // default constructor
                     // doing nothing
 
+  ~Stack();
+
   void push(int value);
 
   int pop();

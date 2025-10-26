@@ -33,3 +33,11 @@ int Stack::peek() {
   }
   return top->val;      // also neochev
 }
+
+Stack::~Stack() {
+    while (top != nullptr) {
+        Node* temp = top;
+        top = top->previous_node;
+        delete temp;
+    }
+}

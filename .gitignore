@@ -1,0 +1,35 @@
+# Компилируемые файлы
+*.exe
+*.out
+*.app
+
+# Объектные файлы
+*.o
+*.obj
+*.a
+
+# Кэш компилятора
+*.gcno
+*.gcda
+
+# Отладочная информация
+*.dSYM/
+debug/
+release/
+
+# Сборки CMake
+build/
+cmake-build-*/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Логи
+*.log
+
+# Системные
+.DS_Store
+Thumbs.db
