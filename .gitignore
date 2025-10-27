@@ -33,3 +33,6 @@ cmake-build-*/
 # Системные
 .DS_Store
 Thumbs.db
+
+# preza
+.key
