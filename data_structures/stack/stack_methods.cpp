@@ -6,7 +6,7 @@ void Stack::push(int value) {         // here we create a new node and assign it
   size_++;                          // our previous top
 }
 
-bool Stack::is_empty() {
+bool Stack::is_empty() const {
   return !size_;        // SO NEOCHEV BOI
 }
 
@@ -23,11 +23,11 @@ int Stack::pop() {
   return ret_val;                                           // return the value we popped
 }
 
-int Stack::size() {
+int Stack::size() const {
   return size_;         // neochev
 }
 
-int Stack::peek() {
+int Stack::peek() const {
   if (is_empty()) {
     throw std::runtime_error("cannot peek in empty stack!");
   }

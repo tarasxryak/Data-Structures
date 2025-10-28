@@ -9,7 +9,7 @@ struct Node {
 
 struct Stack {
  private:
-  int size_ = 0; //zero by default
+  int size_ = 0;        //zero by default
   Node* top = nullptr; //nullptr by default
  public:
   Stack() = default; // default constructor
@@ -21,9 +21,9 @@ struct Stack {
 
   int pop();
 
-  int size();
+  int size() const;
 
-  int peek();
+  int peek() const;
 
-  bool is_empty();
+  bool is_empty() const;
 };
