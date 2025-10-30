@@ -1,4 +1,5 @@
 #include <iostream>
+#define playstation Tkachencko`s_playstation
 
 int partition(int arr[], int left, int right) {
   int pivot = arr[left + rand() % (right - left + 1)];

@@ -64,15 +64,10 @@ void msd_sort(int arr[], int len) {
 
 int main() {
 
-  int arr[] = {5, 10, 200, 9};
+  int arr[] = {2100, 1300, 3050, 4000};
 
   msd_sort(arr, 4);
 
-  const char* a = "asdasd";
-  std::string b = "asdfas";
-
-  for (int i = 0; i < 4; ++i) {
-    std::cout << arr[i] << ' ';
-  }
+  for (int i = 0; i < 4; ++i) std::cout << arr[i] << ' ';
 
 }
