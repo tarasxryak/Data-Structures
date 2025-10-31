@@ -32,8 +32,8 @@ void heapify(int*& arr, int node, int len, bool is_min) {
   }
 }
 
-void sift_down(int*& arr, const int len, blya_budu is_min) {
-  int cp = 0;
+void sift_down(int*& arr, int len, int index, blya_budu is_min) {
+  int cp = index;
   while (cp < len) {
     int ext = cp;
     int lc = 2 * cp + 1;
@@ -79,10 +79,11 @@ void insert(int*& arr, int x, int& cap, int& len, bool is_min) {
 }
 
 int get_top(int*& arr, int& len, bool is_min) {
+  if (len < 0) return -1;
   int ret = arr[0];
   arr[0] = arr[len - 1];
 
-  sift_down(arr, --len, is_min);
+  sift_down(arr, --len, 0, is_min);
   return ret;
 }
 
@@ -99,11 +100,10 @@ void change_priority(int* arr, int len, int index, int new_val, bool is_min) {
   }
 }
 
-void build_heap(int* arr, int len, bool& is_min) {
+void build_heap(int* arr, int len, bool is_min) {
   for (int i = len / 2 - 1; i >= 0; i--) {
-    heapify(arr, i, len, is_min);
+    heapify(arr, i, len, !is_min);
   }
-  is_min = !is_min;
 }
 /*
 ⡜⡢⢣⢪⠊⢎⢮⡺⠊⠓⠓⠙⠊⠚⡼⠚⠊⠓⠙⠪⣺⠘⠑⠓⠑⠑⠑⠕⠑⠃⠁⣦⣆⠀⣶⠄⠐⠐⠀⠂⠀⠀⠠⠀⡀⠀⠐⠀⠀⠂⠂⠂⠂⠂⡂⡂⡂⠂⠂⠂⢂⢂⠂⠂⠂⠂⠂⠂⠂⠔⠀⠑⠑⠂⠄⠑⠓⠤⠀⠀⠐⠐⠐⠐⠐⠐⠀⠙⣦⣴⠙⠀⢔⢔⢐⣐⣐⡐⢔⠈
@@ -260,3 +260,33 @@ void build_heap(int* arr, int len, bool& is_min) {
 ⡽⣺⣹⣳⢳⢽⢝⡷⣝⡮⡯⣮⣞⡮⡷⣕⡞⡾⡺⣓⢽⢺⠽⡽⡕⡽⡽⡖⣮⡲⡱⣕⢽⡸⣪⢮⡪⡗⣗⣕⢏⠎⠀⠨⢈⢂⠪⠨⠢⠱⠨⠢⡑⢅⢇⢪⢪⢪⢪⡣⡣⠅⡂⠄⠂⠡⠑⠌⢌⠢⡑⢔⢑⠜⢔⢕⢱⠱⢡⠃⡇⢇⢕⠕⡕⡕⢕⢱⢱⢱⢱⢱⢕⢝⢜⢜⡜⡜⣜⢜
 ⢯⣟⡮⣮⣻⢽⡳⣏⣗⢽⡹⣖⢷⡹⣝⢖⡽⣵⣻⡺⢮⢟⡽⢽⢭⣫⡳⣝⢮⡳⡝⣮⠯⡞⣞⠮⣳⣝⣞⡎⡧⡅⡈⢀⠀⠠⠈⠌⠨⠨⠨⠨⢐⢁⠢⢊⠢⡣⡣⡣⡣⢡⠢⡑⢌⠌⠄⢅⠡⠈⡂⢑⠐⡁⠅⡐⢄⠱⡸⡸⡸⡸⣐⢕⢕⣊⢎⡎⡎⣎⢪⢱⢱⢕⡝⡲⣪⢪⢪⢣
 */
+
+#define тру true
+#define фейк false
+
+int main() {
+    int* arr = new int[10];
+    
+    for (int i = 0; i < 10; ++i) {
+        arr[i] = i;
+    }
+    
+    // Построение min-heap
+    for (int i = 10/2 - 1; i >= 0; i--) {
+        heapify(arr, i, 10, тру);
+    }
+    
+    for (int i = 0; i < 10; ++i) {
+        std::cout << arr[i] << ' ';
+    }
+    std::cout << std::endl;
+    build_heap(arr, 10, тру);
+    for (int i = 0; i < 10; ++i) {
+        std::cout << arr[i] << ' ';
+    }
+    std::cout << std::endl;
+
+    
+
+    delete[] arr;
+}

@@ -142,7 +142,7 @@ bool list::empty() {
 }
 
 void list::clear() {
-    while (!empty()) {
-        pop_front();
-    }
+  while (!empty()) {
+    pop_front();
+  }
 }

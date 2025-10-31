@@ -1,0 +1,71 @@
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+void print_vec(std::vector<int>& v) {
+  for (const int& el : v) {
+    std::cout << el << ' ';
+  }
+  std::cout << std::endl;
+}
+
+// с использованием stl
+/*
+int main() {
+  int n;
+  std::cin >> n;
+
+  std::vector<int> seq(n);
+  for (int i = 0; i < n; ++i) std::cin >> seq[i];
+
+  std::vector<int> dp;
+
+  for (int i = 0; i < n; ++i) {
+    auto it = std::upper_bound(dp.begin(), dp.end(), seq[i]);
+
+    if (it == dp.end()) {
+      dp.push_back(seq[i]);
+    } else {
+      *it = seq[i];
+    }
+  }
+  std::cout << "lis size is: " << dp.size() << std::endl << "lis: ";
+  print_vec(dp);
+}
+*/
+
+// без
+
+int ub(const std::vector<int>& v, int left, int right, int x) {
+  while (left < right) {
+    int mid = left + (right - left) / 2;
+    
+    if (v[mid] <= x) {
+      left = mid + 1;
+    } else {
+      right = mid;
+    }
+  }
+  return left;
+}
+
+int main() {
+  int n; 
+  std::cin >> n;
+  std::vector<int> seq;
+  for (int i = 0; i < n; ++i) { int c; std::cin >> c; seq.push_back(c); }
+
+  std::vector<int> dp;
+
+  for (int i = 0; i < n; ++i) {
+    int pos = ub(dp, 0, dp.size(), seq[i]);
+
+    if (pos == dp.size()) {
+      dp.push_back(seq[i]);
+    } else {
+      dp[pos] = seq[i];
+    }
+  }
+  std::cout << "lis size: " << dp.size() << std::endl;
+  print_vec(dp);
+}
