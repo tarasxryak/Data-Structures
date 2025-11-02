@@ -39,7 +39,7 @@ int main() {
     std::string a, b;
     std::cin >> a >> b;
 
-    int a = levenstein(a, b);
-    std::cout << a << std::endl;
+    int c = levenstein(a, b);
+    std::cout << c << std::endl;
   }
 }

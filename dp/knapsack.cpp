@@ -1,20 +1,69 @@
 #include <iostream>
 #include <vector>
 
-int main() {
-  int n;
-  std::cin >> n;
+// A(k, s) = max(A(k - 1, s), A(k - 1, s - w_k) + p_k)
 
-  std::vector<std::pair<int, int> > items;
+void print_table(std::vector<std::vector<int> > table) {
+  for (int i = 0; i < table.size(); ++i) {
+    for (int j = 0; j < table[i].size(); ++j) {
+      std::cout << table[i][j] << ' ';
+    }
+    std::cout << std::endl;
+  }
+}
+
+std::vector<int> make_answer(const std::vector<std::vector<int> >& table,
+                             const std::vector<std::pair<int, int> >& items,
+                             int n, int w) {
+  std::vector<int> ans;
+  int k = n;
+  int s = w;
+
+  while (k > 0 && s > 0) {
+    if (table[k][s] == table[k - 1][s]) {
+      --k;
+    } else {
+      ans.push_back(k);             
+      s = s - items[k - 1].second;  
+      --k;
+    }
+  }
+  return ans;
+}
+
+std::vector<std::vector<int> > make_table(const std::vector<std::pair<int, int> >& items, int N, int W) {
   
+  std::vector<std::vector<int> > a(N + 1, std::vector<int>(W + 1, 0));
+
+  for (int k = 1; k <= N; ++k) {
+    for (int w = 1; w <= W; ++w) {
+      int weight_k = items[k - 1].second;
+      int value_k = items[k - 1].first;
+
+      if (weight_k <= w) {
+        a[k][w] = std::max(a[k - 1][w], a[k - 1][w - weight_k] + value_k);
+      } else {
+        a[k][w] = a[k - 1][w];
+      }
+    }
+  }
+  return a;
+}
+
+int main() {
+  int n, w;
+  std::cin >> n >> w;
+
+  std::vector<std::pair<int, int> > items(n);
   for (int i = 0; i < n; ++i) {
     std::cin >> items[i].first >> items[i].second;
   }
 
-  std::vector<std::vector<int> > nw(0, );
-  for (int k = 1; k < n; ++k) {
+  std::vector<int> a = make_answer(make_table(items, n, w), items, n, w);
 
-  } 
+  for (int i = 0; i < a.size(); ++i) {
+    std::cout << a[i] << ' ';
+  }
 }
 
 /*
