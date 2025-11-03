@@ -1,6 +1,6 @@
 #pragma once
 
-struct Queue {
+struct Queue {            
  private:
   int* array;             // array ptr
   int capacity;           // capacity
